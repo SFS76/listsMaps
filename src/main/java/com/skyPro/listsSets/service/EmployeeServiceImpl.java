@@ -6,35 +6,32 @@ import com.skyPro.listsSets.exception.EmployeeNotFoundException;
 import com.skyPro.listsSets.mod.Employee;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private final List<Employee> employeeList;
+    private final Map<String, Employee> employees;
 
     public EmployeeServiceImpl() {
-        this.employeeList = new ArrayList<>();
+        this.employees = new HashMap<>();
     }
 
     @Override
     public Employee add(String firstNane, String lastName) {
         Employee empoyee = new Employee(firstNane, lastName);
-        if (employeeList.contains(empoyee)) {
+        if (employees.containsKey(empoyee.getFullName())) {
             throw new EmployeeAlredyAddedException();
         }
-        employeeList.add(empoyee);
+        employees.put(empoyee.getFullName(), empoyee);
         return empoyee;
     }
 
     @Override
     public Employee find(String firstNane, String lastName) {
         Employee empoyee = new Employee(firstNane, lastName);
-        if (employeeList.contains(empoyee)) {
-            return empoyee;
+        if (employees.containsKey(empoyee.getFullName())) {
+            return employees.get(empoyee.getFullName());
         }
         throw new EmployeeNotFoundException();
     }
@@ -42,8 +39,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee remove(String firstNane, String lastName) {
         Employee empoyee = new Employee(firstNane, lastName);
-        if (employeeList.contains(empoyee)) {
-            employeeList.remove(empoyee);
+        if (employees.containsKey(empoyee.getFullName())) {
+            employees.remove(empoyee.getFullName());
             return empoyee;
         }
         throw new EmployeeNotFoundException();
@@ -51,6 +48,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Collection<Employee> findAll() {
-        return Collections.unmodifiableList(employeeList);
+        return Collections.unmodifiableCollection(employees.values());
     }
 }
