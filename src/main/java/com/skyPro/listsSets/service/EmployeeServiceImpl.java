@@ -17,8 +17,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee add(String firstNane, String lastName) {
-        Employee empoyee = new Employee(firstNane, lastName);
+    public Employee add(String firstNane, String lastName, int salary, int departmentId) {
+        Employee empoyee = new Employee(firstNane, lastName, salary, departmentId);
         if (employees.containsKey(empoyee.getFullName())) {
             throw new EmployeeAlredyAddedException();
         }
@@ -27,8 +27,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee find(String firstNane, String lastName) {
-        Employee empoyee = new Employee(firstNane, lastName);
+    public Employee find(String firstNane, String lastName, int salary, int departmentId) {
+        Employee empoyee = new Employee(firstNane, lastName, salary, departmentId);
         if (employees.containsKey(empoyee.getFullName())) {
             return employees.get(empoyee.getFullName());
         }
@@ -36,8 +36,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee remove(String firstNane, String lastName) {
-        Employee empoyee = new Employee(firstNane, lastName);
+    public Employee remove(String firstNane, String lastName, int salary, int departmentId) {
+        Employee empoyee = new Employee(firstNane, lastName, salary, departmentId);
         if (employees.containsKey(empoyee.getFullName())) {
             employees.remove(empoyee.getFullName());
             return empoyee;
