@@ -28,7 +28,7 @@ public class Employee {
         return firstName + " " + lastName;
     }
 
-    public float getSalary() { return salary; }
+    public int getSalary() { return salary; }
 
     public int getDepartment() { return department; }
 

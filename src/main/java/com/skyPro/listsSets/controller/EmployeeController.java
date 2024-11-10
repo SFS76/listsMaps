@@ -2,6 +2,7 @@ package com.skyPro.listsSets.controller;
 
 import com.skyPro.listsSets.mod.Employee;
 import com.skyPro.listsSets.service.EmployeeService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +21,7 @@ public class EmployeeController {
 
     @GetMapping("/add")
     public Employee addEmployee(@RequestParam String firstName, @RequestParam String lastName, @RequestParam int salary, @RequestParam int departmentId) {
+
         return service.add(firstName, lastName, salary, departmentId);
     }
 
