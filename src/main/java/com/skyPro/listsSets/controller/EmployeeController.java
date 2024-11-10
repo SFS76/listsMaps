@@ -1,5 +1,7 @@
 package com.skyPro.listsSets.controller;
 
+import com.skyPro.listsSets.exception.EmployeeBadRequest;
+import com.skyPro.listsSets.exception.EmployeeNotFoundException;
 import com.skyPro.listsSets.mod.Employee;
 import com.skyPro.listsSets.service.EmployeeService;
 import org.apache.commons.lang3.StringUtils;
@@ -21,7 +23,9 @@ public class EmployeeController {
 
     @GetMapping("/add")
     public Employee addEmployee(@RequestParam String firstName, @RequestParam String lastName, @RequestParam int salary, @RequestParam int departmentId) {
-
+        if (!StringUtils.isAlpha(firstName)||!StringUtils.isAlpha(lastName)) {
+            throw new EmployeeBadRequest("222");
+        }
         return service.add(firstName, lastName, salary, departmentId);
     }
 
