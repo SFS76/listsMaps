@@ -39,7 +39,6 @@ public class DepartmentServiceImplTest {
         //ожидается
         int sum2=departmentService.getEmployeeSumSalary(departmentId);
 
-
         //проверка
         Assertions.assertEquals(sum, sum2);
     }
