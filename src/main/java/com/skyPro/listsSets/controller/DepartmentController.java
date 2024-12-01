@@ -2,10 +2,7 @@ package com.skyPro.listsSets.controller;
 
 import com.skyPro.listsSets.mod.Employee;
 import com.skyPro.listsSets.service.DepartmentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -20,22 +17,27 @@ public class DepartmentController {
         this.departmentService = departmentService;
     }
 
-    @GetMapping("max-salary")
-    public Employee getEmployeeMaxSalary(@RequestParam int departmentId) {
-        return departmentService.getEmployeeMaxSalary(departmentId);
-    }
-
-    @GetMapping("min-salary")
-    public Employee getEmployeeMinSalary(@RequestParam int departmentId) {
-        return departmentService.getEmployeeMinSalary(departmentId);
-    }
-
-    @GetMapping("all")
-    public List<Employee> getEmployeeDepartment(@RequestParam int departmentId) {
+    @GetMapping("{departmentId}/employees")
+    public List<Employee> getEmployeeDepartment(@PathVariable int departmentId) {
         return departmentService.getEmployeeDepartment(departmentId);
     }
 
-    @GetMapping("all-groups")
+    @GetMapping("{departmentId}/salary/sum")
+    public int getEmployeeSumSalary(@PathVariable int departmentId) {
+        return departmentService.getEmployeeSumSalary(departmentId);
+    }
+
+    @GetMapping("{departmentId}/salary/max")
+    public Employee getEmployeeMaxSalary(@PathVariable int departmentId) {
+        return departmentService.getEmployeeMaxSalary(departmentId);
+    }
+
+    @GetMapping("{departmentId}/salary/min")
+    public Employee getEmployeeMinSalary(@PathVariable int departmentId) {
+        return departmentService.getEmployeeMinSalary(departmentId);
+    }
+
+    @GetMapping("employees")
     public Map<Integer, List<Employee>> getEmployeeGroupsDepartment() {
         return departmentService.getEmployeeGroupsDepartment();
     }
